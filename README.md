@@ -55,8 +55,8 @@ and
 
 $$
 \nabla_b C = \begin{bmatrix}
-\dfrac{\partial C}{\partial b^{(n_0)}} \\[6pt]
-\dfrac{\partial C}{\partial b^{(n_1)}} \\[6pt]
+\dfrac{\partial C}{\partial b^{(n_0)}} \\
+\dfrac{\partial C}{\partial b^{(n_1)}} \\
 \dfrac{\partial C}{\partial b^{(n_2)}}
 \end{bmatrix}
 $$
@@ -73,8 +73,8 @@ finally:
 
 $$
 \nabla_\delta C = \begin{bmatrix}
-\delta^{(n_0)} \\[6pt]
-\delta^{(n_1)} \\[6pt]
+\delta^{(n_0)} \\
+\delta^{(n_1)} \\
 \delta^{(n_2)}
 \end{bmatrix}
 $$
