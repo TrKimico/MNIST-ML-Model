@@ -34,7 +34,7 @@ So, the standard function :
 $\dfrac{\partial C}{\partial w^{(L)}} =\dfrac{\partial z^{(L)}}{\partial w^{(L)}} \cdot \dfrac{\partial a^{(L)}}{\partial z^{(L)}} \cdot \sum_{k=1}^{n^{L+1}}\dfrac{\partial C}{\partial a_{k}^{(L+1)}}$
 
 In practice becomes:
-\
+
 $$
 \nabla_w C = \begin{bmatrix}
 \text{vec}\left(\dfrac{\partial C}{\partial w^{(n_0)}}\right) \\
@@ -84,7 +84,7 @@ with:
 $$\delta^{(n_0)}_j = \sum_k \left[ w_{jk}^{(n_1)} \cdot \text{error}_k^{(n_1)} \right]$$
 
 $$\delta^{(n_1)}_j = \sum_k \left[ w_{jk}^{(n_2)} \cdot \text{error}_k^{(n_2)} \right]$$
-\
+
 $\delta^{(n_2)}_j = \hat{y}_j - y_j$
 
 ## How to use
