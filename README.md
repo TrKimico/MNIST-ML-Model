@@ -85,7 +85,7 @@ $$\delta^{(n_0)}_j = \sum_k \left[ w_{jk}^{(n_1)} \cdot \text{error}_k^{(n_1)} \
 
 $$\delta^{(n_1)}_j = \sum_k \left[ w_{jk}^{(n_2)} \cdot \text{error}_k^{(n_2)} \right]$$
 
-$\delta^{(n_2)}_j = \hat{y}_j - y_j$
+$$\delta^{(n_2)}_j = \hat{y}_j - y_j$$
 
 ## How to use
 Move to the directory where you cloned the repo and install libraries you'll need in your virtual environment :
