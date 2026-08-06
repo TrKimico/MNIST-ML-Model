@@ -31,8 +31,10 @@ $a =ReLU(\hat{Z})$  for the two hidden layers, and $a =SoftMax(\hat{Z})$ for the
 \
 ***Back Propagation Equations***
 \
+\
 To compute back propagation, we must first apply the Gradient Descent partial derivative formula and apply it to our specific case (ReLU and Soft-Max activation) in order to get the initial Cost signal of the output layer, which will be used to compute the cost of the parameters attached to it, and propagated via the transposed weight matrix.
 So, the standard function :
+
 $\dfrac{\partial C}{\partial w^{(L)}} =\dfrac{\partial z^{(L)}}{\partial w^{(L)}} \cdot \dfrac{\partial a^{(L)}}{\partial z^{(L)}} \cdot \sum_{k=1}^{n^{L+1}}\dfrac{\partial C}{\partial a_{k}^{(L+1)}}$
 
 In practice becomes:
@@ -103,11 +105,15 @@ python3 main.py
 which will train the model, ask you to export the parameters, and produce both graphs. Then you can run test_network.py which will automatically use the model you exported, run it against a random sample in the TEST dataset, and produce the graph on top of the page with the label the model predicts for the digit, and the actual answer next to it.
 NB : the first launch of main.py will download the database (~50mb) then use it automatically.
 \
+\
 **Footnotes**
 \
+\
 *on the use of AI*
+\
 AI has been used in this project to write gradient_check.py as it is a small module producing only one value for the project. Otherwise it has only been used as a debugging tool, all of the code has been written manually.
 \
 *special thanks*
+\
 The network graph has been produced using the fantastic pydrawnet of nhansen, I thank him for his work. 
 I'd also like to thank the host of the channel 3blue1brown, whose videos I've watched tirelessly to try and understand the task at hand.
