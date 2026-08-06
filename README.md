@@ -28,9 +28,8 @@ $\hat{Z} =XW^{T}+B$
 where $\hat{Z}$ is the output of the matrix multiplication of $X$(the input layer) and $W$(the weights connecting this layer to the next) which has to be transposed $W^{T}$ to fit the matrix multiplication constraints. Then a matrix addition is performed between this product and the $B$(the biases of the destination layer).
 To obtain the activation value of each neuron, we need to pass this intermediate result through an activation function :
 $a =ReLU(\hat{Z})$  for the two hidden layers, and $a =SoftMax(\hat{Z})$ for the output layer.
-\
+
 ***Back Propagation Equations***
-\
 \
 To compute back propagation, we must first apply the Gradient Descent partial derivative formula and apply it to our specific case (ReLU and Soft-Max activation) in order to get the initial Cost signal of the output layer, which will be used to compute the cost of the parameters attached to it, and propagated via the transposed weight matrix.
 So, the standard function :
@@ -96,23 +95,22 @@ Move to the directory where you cloned the repo and install libraries you'll nee
 ```bash
 pip install .
 ```
-\
+
 **Reproducing the Results**
+\
 The seed used to produce the graphs has been pinned, you only have to run the main.py module :
 ```bash
 python3 main.py
 ```
 which will train the model, ask you to export the parameters, and produce both graphs. Then you can run test_network.py which will automatically use the model you exported, run it against a random sample in the TEST dataset, and produce the graph on top of the page with the label the model predicts for the digit, and the actual answer next to it.
 NB : the first launch of main.py will download the database (~50mb) then use it automatically.
-\
-\
+
 **Footnotes**
-\
-\
+
 *on the use of AI*
 \
 AI has been used in this project to write gradient_check.py as it is a small module producing only one value for the project. Otherwise it has only been used as a debugging tool, all of the code has been written manually.
-\
+
 *special thanks*
 \
 The network graph has been produced using the fantastic pydrawnet of nhansen, I thank him for his work. 
