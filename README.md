@@ -37,8 +37,8 @@ In practice becomes:
 \
 $$
 \nabla_w C = \begin{bmatrix}
-\text{vec}\left(\dfrac{\partial C}{\partial w^{(n_0)}}\right) \\[6pt]
-\text{vec}\left(\dfrac{\partial C}{\partial w^{(n_1)}}\right) \\[6pt]
+\text{vec}\left(\dfrac{\partial C}{\partial w^{(n_0)}}\right) \\
+\text{vec}\left(\dfrac{\partial C}{\partial w^{(n_1)}}\right) \\
 \text{vec}\left(\dfrac{\partial C}{\partial w^{(n_2)}}\right)
 \end{bmatrix}
 $$
