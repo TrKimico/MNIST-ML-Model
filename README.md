@@ -35,45 +35,55 @@ $\dfrac{\partial C}{\partial w^{(L)}} =\dfrac{\partial z^{(L)}}{\partial w^{(L)}
 
 In practice becomes:
 \
-$\nabla_w C = 
-\begin{bmatrix} 
-\text{vec}\left(\dfrac{\partial C}{\partial w^{(n_0)}}\right) \\[6pt] 
-\text{vec}\left(\dfrac{\partial C}{\partial w^{(n_1)}}\right) \\[6pt] 
-\text{vec}\left(\dfrac{\partial C}{\partial w^{(n_2)}}\right) 
-\end{bmatrix}$
-\
+$$
+\nabla_w C = \begin{bmatrix}
+\text{vec}\left(\dfrac{\partial C}{\partial w^{(n_0)}}\right) \\[6pt]
+\text{vec}\left(\dfrac{\partial C}{\partial w^{(n_1)}}\right) \\[6pt]
+\text{vec}\left(\dfrac{\partial C}{\partial w^{(n_2)}}\right)
+\end{bmatrix}
+$$
+
 with:
 
-$\dfrac{\partial C}{\partial w^{(n_0)}} = a_i^{(\text{input})} \cdot \text{ReLU}'(z_j^{(n_0)}) \cdot \sum_k \left[ w_{jk}^{(n_1)} \cdot \text{error}_k^{(n_1)} \right]$
-\
-$\dfrac{\partial C}{\partial w^{(n_1)}} = a_i^{(n_0)} \cdot \text{ReLU}'(z_j^{(n_1)}) \cdot \sum_k \left[ w_{jk}^{(n_2)} \cdot \text{error}_k^{(n_2)} \right]$
-\
-$\dfrac{\partial C}{\partial w^{(n_2)}} = a_i^{(n_1)} \cdot (\hat{y}_j - y_j)$
-\
-\
+$$\dfrac{\partial C}{\partial w^{(n_0)}} = a_i^{(\text{input})} \cdot \text{ReLU}'(z_j^{(n_0)}) \cdot \sum_k \left[ w_{jk}^{(n_1)} \cdot \text{error}_k^{(n_1)} \right]$$
+
+$$\dfrac{\partial C}{\partial w^{(n_1)}} = a_i^{(n_0)} \cdot \text{ReLU}'(z_j^{(n_1)}) \cdot \sum_k \left[ w_{jk}^{(n_2)} \cdot \text{error}_k^{(n_2)} \right]$$
+
+$$\dfrac{\partial C}{\partial w^{(n_2)}} = a_i^{(n_1)} \cdot (\hat{y}_j - y_j)$$
+
 and
-$\nabla_b C = 
-\begin{bmatrix} 
-\dfrac{\partial C}{\partial b^{(n_0)}} \\[6pt] 
-\dfrac{\partial C}{\partial b^{(n_1)}} \\[6pt] 
-\dfrac{\partial C}{\partial b^{(n_2)}} 
-\end{bmatrix}$
-\
+
+$$
+\nabla_b C = \begin{bmatrix}
+\dfrac{\partial C}{\partial b^{(n_0)}} \\[6pt]
+\dfrac{\partial C}{\partial b^{(n_1)}} \\[6pt]
+\dfrac{\partial C}{\partial b^{(n_2)}}
+\end{bmatrix}
+$$
+
 with:
 
-$\dfrac{\partial C}{\partial b^{(n_0)}}= \text{ReLU}'(z_j^{(n_0)}) \cdot \sum_k \left[ w_{jk}^{(n_1)} \cdot \text{error}_k^{(n_1)} \right]$
-\
-$\dfrac{\partial C}{\partial b^{(n_1)}} = \text{ReLU}'(z_j^{(n_1)}) \cdot \sum_k \left[ w_{jk}^{(n_2)} \cdot \text{error}_k^{(n_2)} \right]$
-\
-$\dfrac{\partial C}{\partial b^{(n_2)}} = \delta^{(n_2)}_j =\hat{y}_j - y_j$
-\
-\
+$$\dfrac{\partial C}{\partial b^{(n_0)}} = \text{ReLU}'(z_j^{(n_0)}) \cdot \sum_k \left[ w_{jk}^{(n_1)} \cdot \text{error}_k^{(n_1)} \right]$$
+
+$$\dfrac{\partial C}{\partial b^{(n_1)}} = \text{ReLU}'(z_j^{(n_1)}) \cdot \sum_k \left[ w_{jk}^{(n_2)} \cdot \text{error}_k^{(n_2)} \right]$$
+
+$$\dfrac{\partial C}{\partial b^{(n_2)}} = \delta^{(n_2)}_j = \hat{y}_j - y_j$$
+
 finally:
-$\nabla_\delta C = \begin{bmatrix} \delta^{(n_0)} \\[6pt] \delta^{(n_1)} \\[6pt] \delta^{(n_2)} \end{bmatrix}$
-with
-$\delta^{(n_0)}_j = \sum_k \left[ w_{jk}^{(n_1)} \cdot \text{error}_k^{(n_1)} \right]$
-\
-$\delta^{(n_1)}_j = \sum_k \left[ w_{jk}^{(n_2)} \cdot \text{error}_k^{(n_2)} \right]$
+
+$$
+\nabla_\delta C = \begin{bmatrix}
+\delta^{(n_0)} \\[6pt]
+\delta^{(n_1)} \\[6pt]
+\delta^{(n_2)}
+\end{bmatrix}
+$$
+
+with:
+
+$$\delta^{(n_0)}_j = \sum_k \left[ w_{jk}^{(n_1)} \cdot \text{error}_k^{(n_1)} \right]$$
+
+$$\delta^{(n_1)}_j = \sum_k \left[ w_{jk}^{(n_2)} \cdot \text{error}_k^{(n_2)} \right]$$
 \
 $\delta^{(n_2)}_j = \hat{y}_j - y_j$
 
