@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "network-from-scratch"
+version = "0.1.0"
+description = "A NumPy-only neural network built from scratch for MNIST digit classification, benchmarked against PyTorch."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy",
+    "scikit-learn",
+    "matplotlib",
+    "pandas",
+    "torch",
+]
+
+[tool.setuptools]
+py-modules = []
