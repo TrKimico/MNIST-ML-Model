@@ -1,8 +1,8 @@
-![Test Output](images/test_output.png)
+![Test Output](assets/images/test_output.png)
 # Deep Learning: MNIST Image Recognition
 A generic Deep Learning neural network designed to take in a MNIST image (28 x 28 pixel images of handwritten digits) and return which one it concluded it is based on Machine Learning algorithms. All the computation reflects hand-written formulas and has simply been vectored with Numpy for efficiency. No framework has been used.
 ## Network Structure
-![Network Graph](images/nhansen_pydrawnet.png)
+![Network Graph](assets/images/nhansen_pydrawnet.png)
 The very first layer isn't made of neurons, but represents one pixel of each image ($28\times28=784$). The value of each input is determined by the brightness of each pixel: 0 means completely black, 255 completely white, and the shade of grey are computed as intermediate values.
 
 The core components of the network are three neuron layers, two of which are hidden and one is the output layer, i.e. the one holding the answer the network gives to the question "what's that number?". The length of the hidden layers have been chosen to hold enough complexity (a value large enough) while being easy to compute (power of 2). Each neuron holds a bias, and each connection between two neurons holds a weight, these are the parameters which are being updated at each passage of data through the network, and they determine its success. The biases have been initialised at 0 and the weights with $He$ initialisation as it has been shown to be very effective when paired with $ReLU$ activation.
