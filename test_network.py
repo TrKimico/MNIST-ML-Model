@@ -1,4 +1,5 @@
 # import libraries
+from sklearn.datasets import fetch_openml
 import numpy as np
 from scipy.io import arff
 import matplotlib.pyplot as plt
@@ -17,9 +18,9 @@ sample_size = 15
 
 # IMPORT AND HANDLE THE DATASET
 ## import
-data, meta = arff.loadarff('dataset.arff')
-X = np.array(data[[f'pixel{i}' for i in range(1,785)]].tolist(), dtype=np.float32)
-Y = np.array([int(v) for v in data['class']])
+mnist = fetch_openml('mnist_784', version=1, as_frame=False, parser='auto')
+X = mnist.data.astype(np.float32)
+Y = mnist.target.astype(np.int64)
 ## keep only the test dataset
 X_TEST, Y_TEST = X[60000:]/255, Y[60000:]
 

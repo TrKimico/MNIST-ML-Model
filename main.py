@@ -1,6 +1,7 @@
 # External Libraries
 from sklearn.datasets import fetch_openml
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 import numpy as np
 import copy
 # Access other Modules
@@ -13,7 +14,7 @@ from classes.network_objects import Neuron, Weight, Bias, Cost_Weight
 ##################################################
 # Import and Format data
 ##################################################
-
+fm.fontManager.addfont('assets/font/modern_math.otf')
 np.set_printoptions(legacy='1.25') # otherwise it doesn't print floats correctly in the terminal
 ## import
 mnist = fetch_openml('mnist_784', version=1, as_frame=False, parser='auto')
@@ -148,6 +149,37 @@ def test_network(DATASET,ANSWERS,w0,w1,w2,b0,b1,b2):
     accuracy /= len(DATASET)
     return accuracy,final_loss
 
+def plot_graph(keyword,function1_y,function2_y):
+    # settings for the display of the graph
+    plt.rcParams['font.family'] = fm.FontProperties(fname='assets/font/modern_math.otf').get_name()
+    plt.rcParams['xtick.labelsize'] = 16
+    plt.rcParams['ytick.labelsize'] = 16
+    plt.figure(figsize=(15, 11))
+    plt.xlabel("Epoch",fontsize=22, color='k')
+    plt.ylabel(f"{keyword} from training data",fontsize=22, color='k')
+    plt.title(f"Model {keyword} over Epoch",fontsize=27, color='r')
+    indices_val       = list(range(len(function1_y)))
+    # plot data
+    ## VAL data
+    x = indices_val
+    y = function1_y
+    if function1_y == accuracy_val_list:
+        plt.ylim(0.9,1.0)
+    else:
+        plt.yscale('log')
+    plt.plot(x, y, color='k', marker='.', label=f'VAL {keyword}')
+    ## TRAIN data
+    i = indices_val
+    j = function2_y
+    if function2_y == accuracy_train_list:
+        plt.ylim(0.9,1.0)
+    else:
+        plt.yscale('log')
+    plt.plot(i, j, color='m', marker='.', label=f'TRAIN {keyword}')
+    plt.legend(fontsize=14)
+    # print it on screen
+    plt.show()
+
 ##################################################
 # Execute The Program
 ##################################################
@@ -161,13 +193,14 @@ accuracy_train_list  = []
 loss_val_list        = []
 loss_train_list      = []
 timestep_counter     = 0      # needed for Adam
-benchmark_accuracy   = 0.9780 # compared to the average output of the pytorch_benchmark module
+benchmark_accuracy   = 0.9790 # compared to the average output of the pytorch_benchmark module
 
 ######### test before any training #########
 
 accuracy,loss = test_network(X_TEST,Y_TEST,w0,w1,w2,b0,b1,b2)
 print(f"The accuracy of the untrained model is : {round(accuracy*100,4)}%")
 print(f"The loss of the untrained model is : {round(loss,4)}\n")
+
 # run another test on training data to add as baseline for data plot
 baseline_accuracy_val, baseline_loss_val = test_network(X_VAL,Y_VAL,w0,w1,w2,b0,b1,b2)
 loss_val_list.append(baseline_loss_val)
@@ -206,10 +239,12 @@ for x in range(settings.epoch_length):
 
 w0,w1,w2,b0,b1,b2 = best_params # restore best value stored during training
 
+## test and display results
 accuracy,loss = test_network(X_TEST,Y_TEST,w0,w1,w2,b0,b1,b2)
 print(f"\nThe accuracy of the model is : {round(accuracy*100,4)}%")
 print(f"\nThe loss of the model is : {round(loss,4)}\n")
 
+## compare to benchmark
 if accuracy > benchmark_accuracy:
     print(f"The model outperformed the benchmark by a margin of {round((accuracy-benchmark_accuracy)*100,4)}%")
 elif (benchmark_accuracy*1.001) < accuracy < (benchmark_accuracy*0.999):
@@ -217,6 +252,7 @@ elif (benchmark_accuracy*1.001) < accuracy < (benchmark_accuracy*0.999):
 else:
     print(f"The model was outperformed by the benchmark by a margin of {round((benchmark_accuracy-accuracy)*100,4)}%")
 
+## ask to export params
 while True:
     export_paramz = input("\nDo you wish to export the weights and biases? (Y/N): ").strip().upper()
     if export_paramz in {"Y", "YES"}:
@@ -232,48 +268,6 @@ while True:
 ######### plot data #########
 
 ##### plot the accuracy of TRAIN and VAL
-# settings for the display of the graph
-plt.rcParams['xtick.labelsize'] = 14
-plt.rcParams['ytick.labelsize'] = 14
-plt.figure(figsize=(15, 11))
-plt.xlabel("Epoch",fontsize=20, color='k')
-plt.ylabel("Accuracy from training data",fontsize=20, color='k')
-plt.title("Model Accuracy over Epoch",fontsize=25, color='r')
-indices_val       = list(range(len(accuracy_val_list)))
-# plot data
-## VAL accuracy
-x = indices_val
-y = accuracy_val_list
-plt.ylim(0.9,1.0)
-plt.plot(x, y, color='k', marker='.', label='VAL accuracy')
-## TRAIN accuracy
-i = indices_val
-j = accuracy_train_list
-plt.ylim(0.9,1.0)
-plt.plot(i, j, color='r', marker='.', label='TRAIN accuracy')
-plt.legend(fontsize=14)
-# print it on screen
-plt.show()
-
+plot_graph('Accuracy',accuracy_val_list,accuracy_train_list)
 ##### plot the loss of TRAIN and VAL
-plt.rcParams['xtick.labelsize'] = 14
-plt.rcParams['ytick.labelsize'] = 14
-plt.figure(figsize=(15, 11))
-plt.xlabel("Epoch",fontsize=20, color='k')
-plt.ylabel("Loss from training data",fontsize=20, color='k')
-plt.title("Model Loss over Epoch",fontsize=25, color='r')
-indices_val       = list(range(len(accuracy_val_list)))
-# plot data
-## VAL loss
-x = indices_val
-y = loss_val_list
-plt.plot(x, y, color='k', marker='.', label='VAL Loss')
-plt.yscale('log')
-## TRAIN loss
-i = indices_val
-j = loss_train_list
-plt.plot(i, j, color='r', marker='.', label='TRAIN Loss')
-plt.yscale('log')
-plt.legend(fontsize=14)
-# print it on screen
-plt.show()
+plot_graph('Loss',loss_val_list,loss_train_list)

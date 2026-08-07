@@ -13,12 +13,12 @@ On top of these, global variables have been added to support these algorithms wh
 - Adam : introduces $\beta_{1}$ , $\beta_2$  , $\varepsilon$ which adapt the learning rate per-parameter using running estimates of the gradient's mean and variance, allowing to push past low proxima of the gradient function
 
 ## Results
-![Accuracy Graph](images/accuracy.png)
+![Accuracy Graph](assets/images/accuracy.png)
 **The algorithm reaches 98.20% accuracy** on the test dataset ($\sigma=0.06$ at $n=30$ ), the gradients have been verified via central-difference check (cf gradient_check.py), max_relative_error < $1\times10^{-7}$ which is far below the acceptable threshold. The seed used to create the graphs has been pinned in the code for reproducibility. The model even goes up to 99.60% against the training dataset, but some overfitting is expected and has been optimised with L2 penalty.
 The algorithm had already reached 96% accuracy before Adam / LR Decay / L2 penalty were even introduced, showing that the back propagation logic is very solid, and that the training data is very well standardised and homogeneous.
 The current model performs better than a simple Pytorch equivalent (cf pytorch_benchmark.py) by a margin of 0.30% which is statistically significant and shows the optimisation of the current model. It still underperforms compared to state of the art CNN which can exceed 99.50%.
 
-![Loss Graph](images/loss.png)
+![Loss Graph](assets/images/loss.png)
 On this log scale, we can see loss decreasing from around $2.4$, which is coherent with a random initialisation, and goes down to $1.2\times10^{-1}$ for both the validation and the testing set, and $8.6\times10^{-2}$ for the training set which reflects that training has been about lowering as much as we can the loss of the training set.
 ## Calculation Details
 ***Forward Propagation Equations***
